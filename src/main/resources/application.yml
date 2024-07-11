@@ -1,0 +1,46 @@
+server:
+  error:
+    include-message: ALWAYS
+  servlet:
+    contextPath: /inventory-management
+
+
+spring:
+  application:
+    name: inventory-management
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1234
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enabled: always
+
+
+# Actuator / Prometheus
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    metrics.enabled: true
+    prometheus.enabled: true
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus.enabled: true
+
+# JWT
+security:
+  jwt:
+    secret-key: 089417bd9abf11f94d96638f0d4eacb338d8568c09bb45a45461c46850e41bcd
+    expiration-time: 3600000 # 1 hour
