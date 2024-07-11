@@ -18,8 +18,15 @@ public interface EmployeeMapper {
     EmployeeMapper INSTANCE = Mappers.getMapper(EmployeeMapper.class);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "authorities", ignore = true)
     Employee createDtoToEntity(EmployeeCreateDto dto);
 
+
+    @Mapping(target = "createdAt", expression = "java(entity.getCreatedAt().toInstant())")
+    @Mapping(target = "updatedAt", expression = "java(entity.getUpdatedAt().toInstant())")
+    @Mapping(target = "password", ignore = true)
     EmployeeDto entityToDto(Employee entity);
 
     default PagingDto<EmployeeDto> toPagingDto(Page<Employee> employees) {
@@ -44,7 +51,8 @@ public interface EmployeeMapper {
         dto.setName(employee.getName());
         dto.setEmail(employee.getEmail());
         dto.setNif(employee.getNif());
-        dto.setPassword(employee.getPassword());
+        dto.setCreatedAt(employee.getCreatedAt().toInstant());
+        dto.setUpdatedAt(employee.getUpdatedAt().toInstant());
 
         return dto;
     }
