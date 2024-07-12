@@ -11,8 +11,11 @@ public class AuthResponse {
 
     private long expiresIn;
 
-    public AuthResponse(String token, long expiresIn) {
+    private String role;
+
+    public AuthResponse(String token, long expiresIn, String role) {
         this.token = token;
         this.expiresIn = expiresIn;
+        this.role = role;
     }
 }

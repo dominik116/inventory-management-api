@@ -26,11 +26,6 @@ public class EmployeeService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public EmployeeDto create(final EmployeeCreateDto dto) {
-        log.info("IN EmployeeService: create");
-        return this.mapper.entityToDto(this.repository.save(this.mapper.createDtoToEntity(dto)));
-    }
-
     public EmployeeDto findById(final Long id) {
         log.info("IN EmployeeService: findById");
         return this.mapper.entityToDto(this.repository.findById(id).orElseThrow(EntityNotFoundException::new));

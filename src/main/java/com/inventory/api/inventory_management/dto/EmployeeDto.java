@@ -33,4 +33,6 @@ public class EmployeeDto implements Serializable {
     private Instant createdAt;
 
     private Instant updatedAt;
+
+    private String role;
 }

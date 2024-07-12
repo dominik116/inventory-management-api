@@ -8,13 +8,11 @@ import com.inventory.api.inventory_management.service.AuthenticationService;
 import com.inventory.api.inventory_management.service.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
 
     private final JwtService jwtService;
@@ -33,7 +31,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> authenticate(@RequestBody @Valid final AuthRequest authRequest) {
-        final String jwtToken = this.jwtService.generateToken(this.authenticationService.authenticate(authRequest));
-        return ResponseEntity.ok(new AuthResponse(jwtToken, this.jwtService.getExpirationTime()));
+        final Employee employee = this.authenticationService.authenticate(authRequest);
+        final String jwtToken = this.jwtService.generateToken(employee);
+        return ResponseEntity.ok(new AuthResponse(jwtToken, this.jwtService.getExpirationTime(), employee.getRole()));
     }
 }

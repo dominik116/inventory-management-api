@@ -49,6 +49,8 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    private String role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
