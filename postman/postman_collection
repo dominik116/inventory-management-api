@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "1db49ea7-3dc6-4522-905d-173c76812e04",
+		"name": "InventoryManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36816372"
+	},
+	"item": [
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Get all articles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MjA1NDU2MDgsImV4cCI6MTcyMDU0OTIwOH0.ThwbTE-j1jsZnIlXAm5FEC63TuXM87mPsirFNaS5We4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/articles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an article by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MjA1NDQ5ODcsImV4cCI6MTcyMDU0ODU4N30.ojvp1B_YMcQbgszhbjaFwZH0MN7TArv6MNNG0NG-dd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/articles/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"articles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test3\",\r\n    \"description\": \"Test description3\",\r\n    \"quantity\": 46,\r\n    \"price\": 2.52,\r\n    \"EAN\": \"2392429495\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/inventory-management/articles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put update an article",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"TestError\",\r\n    \"description\": \"Test descriptionUpdated\",\r\n    \"quantity\": 5,\r\n    \"price\": 12.0,\r\n    \"EAN\": \"239242949333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/inventory-management/articles/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"articles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an article by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MjA1NDQ5ODcsImV4cCI6MTcyMDU0ODU4N30.ojvp1B_YMcQbgszhbjaFwZH0MN7TArv6MNNG0NG-dd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/articles/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"articles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get all employees",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get an employee by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Put update an employee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dominik.novotny\",\r\n    \"name\": \"Dominik\",\r\n    \"surname\": \"Novotný\",\r\n    \"email\": \"dominik116@hotmail.com\",\r\n    \"nif\": \"Y0740073Q\",\r\n    \"password\": \"4321\",\r\n    \"enabled\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/inventory-management/employees/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"employees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sign up employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"dominik.novotny\",\r\n    \"name\": \"Dominik\",\r\n    \"surname\": \"Novotný\",\r\n    \"nif\": \"Y0740073Q\",\r\n    \"email\": \"dominik116@hotmail.es\",\r\n    \"enabled\": true,\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/inventory-management/auth/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"inventory-management",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"dominik.novotny\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/inventory-management/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"inventory-management",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/inventory-management/actuator",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"inventory-management",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
