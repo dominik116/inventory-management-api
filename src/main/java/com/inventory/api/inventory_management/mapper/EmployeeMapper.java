@@ -49,8 +49,10 @@ public interface EmployeeMapper {
         dto.setId(employee.getId());
         dto.setUsername(employee.getUsername());
         dto.setName(employee.getName());
+        dto.setSurname(employee.getSurname());
         dto.setEmail(employee.getEmail());
         dto.setNif(employee.getNif());
+        dto.setEnabled(employee.getEnabled());
         dto.setCreatedAt(employee.getCreatedAt().toInstant());
         dto.setUpdatedAt(employee.getUpdatedAt().toInstant());
 

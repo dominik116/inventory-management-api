@@ -9,11 +9,14 @@ import com.inventory.api.inventory_management.repository.EmployeeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,15 @@ public class EmployeeService {
     private final EmployeeMapper mapper;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final CacheManager cacheManager;
+
+    public EmployeeDto create(final EmployeeCreateDto dto) {
+        log.info("IN EmployeeService: create");
+        final Employee employee = this.repository.save(this.mapper.createDtoToEntity(dto));
+        this.clearCache();
+        return this.mapper.entityToDto(employee);
+    }
 
     public EmployeeDto findById(final Long id) {
         log.info("IN EmployeeService: findById");
@@ -42,13 +54,20 @@ public class EmployeeService {
         final Employee entity = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
         this.updateEntityFields(entity, dto);
         this.repository.save(entity);
+        this.clearCache();
         log.info("OUT EmployeeService: putUpdate");
     }
 
     public void deleteById(final Long id) {
         log.info("IN EmployeeService: deleteById");
         this.repository.deleteById(id);
+        this.clearCache();
         log.info("OUT EmployeeService: deleteById");
+    }
+
+    private void clearCache() {
+        Objects.requireNonNull(this.cacheManager.getCache("employeeCache")).clear();
+        log.info("Cache 'employeeCache' has been cleared successfully.");
     }
 
     private void updateEntityFields(final Employee employee, final EmployeeCreateDto dto) {
@@ -66,6 +85,10 @@ public class EmployeeService {
 
         if (dto.getSurname() != null && !dto.getSurname().equals(employee.getSurname())) {
             employee.setSurname(dto.getSurname());
+        }
+
+        if (dto.getEnabled() != null && !dto.getEnabled().equals(employee.getEnabled())) {
+            employee.setEnabled(dto.getEnabled());
         }
 
         if (dto.getPassword() != null && !dto.getPassword().equals(employee.getPassword())) {

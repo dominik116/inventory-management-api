@@ -202,6 +202,149 @@
 			]
 		},
 		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get all open notifications",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create a notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MzMyNTU5NzQsImV4cCI6MTczMzI1OTU3NH0.5wimJTjFqR2op-gaVdf6t9LnHm9lp3WGy9_AhOZp9_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"Testing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/inventory-management/notifications",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get number of open notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MzMyNTU5NzQsImV4cCI6MTczMzI1OTU3NH0.5wimJTjFqR2op-gaVdf6t9LnHm9lp3WGy9_AhOZp9_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/notifications/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"notifications",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a notification's status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MzMyNTU5NzQsImV4cCI6MTczMzI1OTU3NH0.5wimJTjFqR2op-gaVdf6t9LnHm9lp3WGy9_AhOZp9_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/notifications/1?status=closed",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"notifications",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "closed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a notification by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MzMyNTU5NzQsImV4cCI6MTczMzI1OTU3NH0.5wimJTjFqR2op-gaVdf6t9LnHm9lp3WGy9_AhOZp9_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/inventory-management/notifications/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"inventory-management",
+								"notifications",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Sign up employee",
 			"request": {
 				"method": "POST",
@@ -260,16 +403,25 @@
 		{
 			"name": "Actuator",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb21pbmlrLm5vdm90bnkiLCJpYXQiOjE3MzMxNjk3MzQsImV4cCI6MTczMzE3MzMzNH0.VDlmvfxYSW8nVe63Y_zaQegRQMmRmtczUa068-12Zrs",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/inventory-management/actuator",
+					"raw": "{{URL}}/inventory-management",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
-						"inventory-management",
-						"actuator"
+						"inventory-management"
 					]
 				}
 			},

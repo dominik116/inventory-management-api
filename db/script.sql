@@ -7,11 +7,13 @@ CREATE TABLE employees (
     nif VARCHAR(9) NOT NULL,
     email VARCHAR NOT NULL,
     enabled BOOLEAN DEFAULT FALSE,
-    password VARCHAR NOT NULL
+    password VARCHAR NOT NULL,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 
--- Create table article
-CREATE TABLE article (
+-- Create table articles
+CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
     EAN VARCHAR NOT NULL,
     Name VARCHAR NOT NULL,
@@ -23,6 +25,8 @@ CREATE TABLE article (
 -- Create table notifications
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
-    message JSONB,
-    status VARCHAR
+    message VARCHAR NOT NULL,
+    status VARCHAR,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );

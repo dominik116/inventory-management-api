@@ -25,4 +25,16 @@
             <offheap unit="MB">5</offheap>
         </resources>
     </cache>
+
+    <cache alias="notificationCache">
+        <key-type>java.lang.String</key-type>
+        <value-type>com.inventory.api.inventory_management.dto.PagingDto</value-type>
+        <expiry>
+            <ttl unit="minutes">30</ttl>
+        </expiry>
+        <resources>
+            <heap>20</heap>
+            <offheap unit="MB">5</offheap>
+        </resources>
+    </cache>
 </config>
