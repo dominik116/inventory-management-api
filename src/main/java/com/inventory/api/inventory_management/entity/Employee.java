@@ -2,7 +2,6 @@ package com.inventory.api.inventory_management.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,8 +36,7 @@ public class Employee implements UserDetails {
     private String email;
 
     @Column(nullable = false)
-    @ColumnDefault("true")
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @Column(nullable = false)
     private String password;
@@ -51,8 +49,7 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @ColumnDefault("user")
-    private String role;
+    private String role = "user";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -6,6 +6,7 @@ import com.inventory.api.inventory_management.dto.PagingDto;
 import com.inventory.api.inventory_management.entity.Article;
 import com.inventory.api.inventory_management.mapper.ArticleMapper;
 import com.inventory.api.inventory_management.repository.ArticleRepository;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,9 @@ public class ArticleService {
 
     public ArticleDto create(final ArticleCreateDto dto) {
         log.info("IN ArticleService: create");
+        if (this.repository.findByEan(dto.getEan()).isPresent()) {
+            throw new EntityExistsException("Article with EAN: " + dto.getEan() + " already exists.");
+        }
         final Article article = this.repository.save(this.mapper.createDtoToEntity(dto));
         this.clearCache();
         return this.mapper.entityToDto(article);
