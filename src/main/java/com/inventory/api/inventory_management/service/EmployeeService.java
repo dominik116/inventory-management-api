@@ -42,9 +42,9 @@ public class EmployeeService {
         return this.mapper.entityToDto(employee);
     }
 
-    public EmployeeDto findById(final Long id) {
-        log.info("IN EmployeeService: findById");
-        return this.mapper.entityToDto(this.repository.findById(id).orElseThrow(EntityNotFoundException::new));
+    public EmployeeDto findByUsername(final String username) {
+        log.info("IN EmployeeService: findByUsername");
+        return this.mapper.entityToDto(this.repository.findByUsername(username).orElseThrow(EntityNotFoundException::new));
     }
 
     @Cacheable(value = "employeeCache", key = "'page:' + #page + ',size:' + #size")

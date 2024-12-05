@@ -2,6 +2,7 @@ package com.inventory.api.inventory_management.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "employees")
 @Data
+@NoArgsConstructor
 public class Employee implements UserDetails {
 
     @Id
@@ -50,6 +52,10 @@ public class Employee implements UserDetails {
     private Date updatedAt;
 
     private String role = "user";
+
+    public Employee(final Long id) {
+        this.id = id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

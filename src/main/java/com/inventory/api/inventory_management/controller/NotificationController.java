@@ -20,16 +20,19 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST, path = "/notifications", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<NotificationDto> postNotification(@Valid @RequestBody final NotificationCreateDto dto) {
-        return ResponseEntity.created(URI.create("/notifications")).body(this.notificationService.create(dto));
+    @RequestMapping(method = RequestMethod.POST, path = "/notifications/{username}", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<NotificationDto> postNotification(@PathVariable("username") final String username,
+                                                            @Valid @RequestBody final NotificationCreateDto dto) {
+        return ResponseEntity.created(URI.create("/notifications")).body(this.notificationService.create(username, dto));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, path = "/notifications", produces = {"application/json"})
     public ResponseEntity<PagingDto<NotificationDto>> findAllNotificationWithPagination(
-            @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "10") final int size) {
-        return ResponseEntity.ok(this.notificationService.findAll(page, size));
+            @RequestParam(value = "username", required = false) final String username,
+            @RequestParam(name = "page", defaultValue = "0") final int page,
+            @RequestParam(name = "size", defaultValue = "10") final int size) {
+        return ResponseEntity.ok(this.notificationService.findAll(page, size, username));
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -44,9 +47,15 @@ public class NotificationController {
         this.notificationService.updateStatus(id, status);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(method = RequestMethod.PUT, path = "/notifications/{id}/message", produces = {"application/json"})
+    public void updateNotificationMessage(@PathVariable("id") final Long id, @Valid @RequestBody final NotificationCreateDto dto) {
+        this.notificationService.updateNotification(id, dto);
+    }
+
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET, path = "/notifications/count", produces = {"application/json"})
-    public ResponseEntity<Integer> getOpenNotificationCount() {
-        return ResponseEntity.ok(this.notificationService.getOpenNotificationNumber());
+    @RequestMapping(method = RequestMethod.GET, path = "/notifications/count/{username}", produces = {"application/json"})
+    public ResponseEntity<Integer> getOpenNotificationCount(@PathVariable final String username) {
+        return ResponseEntity.ok(this.notificationService.getOpenNotificationNumber(username));
     }
 }

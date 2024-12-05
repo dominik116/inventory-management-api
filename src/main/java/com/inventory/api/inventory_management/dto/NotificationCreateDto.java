@@ -7,7 +7,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NotificationCreateDto {
 
+    private String subject;
+
     private String message;
 
     private String status;
+
+    private String username;
 }

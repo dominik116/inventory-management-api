@@ -33,9 +33,9 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET, path = "/employees/{id}", produces = {"application/json"})
-    public ResponseEntity<EmployeeDto> findEmployeeById(@PathVariable("id") final Long id) {
-        return ResponseEntity.ok(this.employeeService.findById(id));
+    @RequestMapping(method = RequestMethod.GET, path = "/employees/{username}", produces = {"application/json"})
+    public ResponseEntity<EmployeeDto> findEmployeeByUsername(@PathVariable("username") final String username) {
+        return ResponseEntity.ok(this.employeeService.findByUsername(username));
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

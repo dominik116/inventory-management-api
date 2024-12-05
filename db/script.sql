@@ -25,8 +25,10 @@ CREATE TABLE articles (
 -- Create table notifications
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
+    subject VARCHAR NOT NULL,
     message VARCHAR NOT NULL,
     status VARCHAR,
+    employee_id INT REFERENCES employees(id) ON DELETE CASCADE,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );

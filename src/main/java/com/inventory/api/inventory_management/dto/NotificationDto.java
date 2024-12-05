@@ -11,9 +11,13 @@ public class NotificationDto {
 
     private Long id;
 
+    private String subject;
+
     private String message;
 
     private String status;
+
+    private String username;
 
     private Instant createdAt;
 
