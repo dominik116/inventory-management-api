@@ -56,6 +56,12 @@ public class NotificationController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, path = "/notifications/count/{username}", produces = {"application/json"})
     public ResponseEntity<Integer> getOpenNotificationCount(@PathVariable final String username) {
-        return ResponseEntity.ok(this.notificationService.getOpenNotificationNumber(username));
+        return ResponseEntity.ok(this.notificationService.getOpenNotificationNumberByUsername(username));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.GET, path = "/notifications/count", produces = {"application/json"})
+    public ResponseEntity<Integer> getOpenNotificationCount() {
+        return ResponseEntity.ok(this.notificationService.getOpenNotificationNumber());
     }
 }

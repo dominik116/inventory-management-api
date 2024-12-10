@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleSecurityException(final Exception exception) {
+
         ProblemDetail errorDetail = null;
 
         log.error(String.valueOf(exception));

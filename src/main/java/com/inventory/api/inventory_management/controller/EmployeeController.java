@@ -10,20 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST, path = "/employees", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<EmployeeDto> postEmployee(@Valid @RequestBody final EmployeeCreateDto dto) {
-        return ResponseEntity.created(URI.create("/employees")).body(this.employeeService.create(dto));
-    }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, path = "/employees", produces = {"application/json"})

@@ -35,6 +35,10 @@ public class ArticleService {
         if (this.repository.findByEan(dto.getEan()).isPresent()) {
             throw new EntityExistsException("Article with EAN: " + dto.getEan() + " already exists.");
         }
+
+        if (this.repository.findByName(dto.getName()).isPresent()) {
+            throw new EntityExistsException("Article with Name: " + dto.getName() + " already exists.");
+        }
         final Article article = this.repository.save(this.mapper.createDtoToEntity(dto));
         this.clearCache();
         return this.mapper.entityToDto(article);

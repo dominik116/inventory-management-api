@@ -15,5 +15,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     Page<Notification> findAllByStatusAndUsername(String status, String username, Pageable pageable);
 
     @Query("SELECT count(n) FROM Notification n INNER JOIN Employee e ON n.employee.id = e.id WHERE n.status like %?1% and e.username like %?2%")
-    Integer getOpenNotificationNumber(String status, String username);
+    Integer getOpenNotificationNumberByUsername(String status, String username);
+
+    @Query("SELECT count(n) FROM Notification n WHERE n.status like %?1%")
+    Integer getOpenNotificationNumber(String status);
 }

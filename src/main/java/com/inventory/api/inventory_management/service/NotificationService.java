@@ -84,9 +84,14 @@ public class NotificationService {
         log.info("OUT NotificationService: updateNotification");
     }
 
-    public Integer getOpenNotificationNumber(final String username) {
+    public Integer getOpenNotificationNumberByUsername(final String username) {
+        log.info("IN NotificationService: getOpenNotificationNumberByUsername");
+        return this.repository.getOpenNotificationNumberByUsername(OPEN_STATUS, username);
+    }
+
+    public Integer getOpenNotificationNumber() {
         log.info("IN NotificationService: getOpenNotificationNumber");
-        return this.repository.getOpenNotificationNumber(OPEN_STATUS, username);
+        return this.repository.getOpenNotificationNumber(OPEN_STATUS);
     }
 
     private void clearCache() {
