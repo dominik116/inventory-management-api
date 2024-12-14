@@ -21,6 +21,7 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthenticationService {
+
     private final EmployeeRepository employeeRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -43,7 +44,8 @@ public class AuthenticationService {
     }
 
     public Employee authenticate(final AuthRequest request) {
-        this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         return this.employeeRepository.findByUsername(request.getUsername()).orElseThrow();
     }
 
