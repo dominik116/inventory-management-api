@@ -58,6 +58,11 @@ public class Employee implements UserDetails {
     }
 
     @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }

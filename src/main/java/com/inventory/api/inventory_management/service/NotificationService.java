@@ -73,6 +73,7 @@ public class NotificationService {
             notification.setStatus(status);
         }
         this.repository.save(notification);
+        this.clearCache();
     }
 
     public void updateNotification(final Long id, final NotificationCreateDto dto) {

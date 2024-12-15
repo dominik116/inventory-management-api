@@ -80,6 +80,10 @@ public class EmployeeService {
             employee.setSurname(dto.getSurname());
         }
 
+        if (dto.getNif() != null && !dto.getNif().equals(employee.getNif())) {
+            employee.setNif(dto.getNif());
+        }
+
         if (dto.getEnabled() != null && !dto.getEnabled().equals(employee.getEnabled())) {
             employee.setEnabled(dto.getEnabled());
         }

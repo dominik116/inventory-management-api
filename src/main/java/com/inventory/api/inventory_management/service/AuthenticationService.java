@@ -7,6 +7,7 @@ import com.inventory.api.inventory_management.entity.Employee;
 import com.inventory.api.inventory_management.mapper.EmployeeMapper;
 import com.inventory.api.inventory_management.repository.EmployeeRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
@@ -37,20 +38,26 @@ public class AuthenticationService {
         if (this.employeeRepository.findByUsername(dto.getUsername()).isPresent()) {
             throw new EntityExistsException("The username: " + dto.getUsername() + " already exists.");
         }
-        this.passwordEncoder.encode(dto.getPassword());
+        dto.setPassword(this.passwordEncoder.encode(dto.getPassword()));
         final Employee employee = this.employeeRepository.save(this.employeeMapper.createDtoToEntity(dto));
         this.clearCache();
         return this.employeeMapper.entityToDto(employee);
     }
 
     public Employee authenticate(final AuthRequest request) {
+        log.info("IN AuthenticationService: authenticate");
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        return this.employeeRepository.findByUsername(request.getUsername()).orElseThrow();
+
+        this.clearCache();
+        return this.employeeRepository.findByUsername(
+                request.getUsername()).orElseThrow(EntityNotFoundException::new);
     }
 
     private void clearCache() {
         Objects.requireNonNull(this.cacheManager.getCache("employeeCache")).clear();
-        log.info("Cache 'employeeCache' has been cleared successfully.");
+        Objects.requireNonNull(this.cacheManager.getCache("articleCache")).clear();
+        Objects.requireNonNull(this.cacheManager.getCache("notificationCache")).clear();
+        log.info("All caches has been cleared successfully.");
     }
 }
