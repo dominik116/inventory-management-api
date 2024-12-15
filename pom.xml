@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>com.inventory.api</groupId>
-    <artifactId>inventory-management-api</artifactId>
+    <artifactId>inventory-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>inventory-management</name>
     <description>Inventory Management API</description>
